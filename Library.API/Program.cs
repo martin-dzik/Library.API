@@ -1,6 +1,7 @@
 
 using Library.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 namespace Library.API
 {
@@ -32,12 +33,19 @@ namespace Library.API
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.MapScalarApiReference(options =>
+                {
+                    options
+                        .WithTitle("Library API")
+                        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+                });
             }
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors(allowAllPolicy);
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
