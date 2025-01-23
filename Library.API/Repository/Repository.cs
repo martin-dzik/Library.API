@@ -15,7 +15,7 @@ namespace Library.API.Repository
 
         public async Task<T> AddAsync(T item)
         {
-            await _dbContext.AddAsync(item);
+            _dbContext.Add(item);
             await _dbContext.SaveChangesAsync();
 
             return item;
