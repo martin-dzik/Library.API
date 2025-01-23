@@ -1,5 +1,8 @@
 
+using Library.API.Configurations;
+using Library.API.Contracts;
 using Library.API.Data;
+using Library.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -26,6 +29,23 @@ namespace Library.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(allowAllPolicy, policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
+                });
+            });
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+            builder.Services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 
             var app = builder.Build();
 

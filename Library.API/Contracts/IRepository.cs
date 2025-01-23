@@ -6,10 +6,13 @@
         
         Task<T?> GetAsync(int id);
 
-        Task<T> AddAsync(T item);
+        void Add(T item);
 
-        Task Update(T item);
+        void Update(T item);
 
-        Task DeleteAsync(int it);
+        Task<bool> Delete(int it);
+
+        Task SaveChangesAsync();
+
     }
 }

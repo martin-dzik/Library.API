@@ -17,8 +17,4 @@
     <PackageReference Include="Scalar.AspNetCore" Version="2.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
 </Project>

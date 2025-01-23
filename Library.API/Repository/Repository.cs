@@ -13,15 +13,12 @@ namespace Library.API.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<T> AddAsync(T item)
+        public void Add(T item)
         {
             _dbContext.Add(item);
-            await _dbContext.SaveChangesAsync();
-
-            return item;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> Delete(int id)
         {
             var entity = await _dbContext
                 .Set<T>()
@@ -30,9 +27,11 @@ namespace Library.API.Repository
             if (entity != null)
             {
                 _dbContext.Remove(entity);
-                
-                await _dbContext.SaveChangesAsync();
+
+                return await Task.FromResult(true);
             }
+
+            return await Task.FromResult(false);
         }
         public async Task<IList<T>> GetAllAsync()
         {
@@ -48,11 +47,14 @@ namespace Library.API.Repository
                 .FindAsync(id);
         }
 
-        public async Task Update(T item)
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public void Update(T item)
         {
             _dbContext.Update(item);
-
-            await _dbContext.SaveChangesAsync();
         }
     }
 }
