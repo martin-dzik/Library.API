@@ -4,6 +4,7 @@ using Library.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.API.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250126171638_UpdateLoan")]
+    partial class UpdateLoan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,9 +93,6 @@ namespace Library.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date");
 
@@ -103,8 +103,6 @@ namespace Library.API.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("ReaderId");
 
@@ -147,24 +145,11 @@ namespace Library.API.Migrations
 
             modelBuilder.Entity("Library.API.Models.Loan", b =>
                 {
-                    b.HasOne("Library.API.Models.Book", "Book")
-                        .WithMany("Loans")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Library.API.Models.Reader", "Reader")
                         .WithMany("Loans")
                         .HasForeignKey("ReaderId");
 
-                    b.Navigation("Book");
-
                     b.Navigation("Reader");
-                });
-
-            modelBuilder.Entity("Library.API.Models.Book", b =>
-                {
-                    b.Navigation("Loans");
                 });
 
             modelBuilder.Entity("Library.API.Models.Reader", b =>

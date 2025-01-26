@@ -9,7 +9,6 @@ namespace Library.API.DTOs.LoanDtos
         public DateOnly EndDate { get; set; }
 
 
-
-        public virtual required ICollection<ReturnBookDto> Books { get; set; }
+        public required ReturnBookDto Book { get; set; }
     }
 }

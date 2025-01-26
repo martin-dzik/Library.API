@@ -10,6 +10,7 @@
         public Reader? Reader { get; set; }
         public Guid? ReaderId { get; set; }
 
-        public virtual required ICollection<Book> Books { get; set; }
+        public required Book Book { get; set; }
+        public required int BookId { get; set; }
     }
 }

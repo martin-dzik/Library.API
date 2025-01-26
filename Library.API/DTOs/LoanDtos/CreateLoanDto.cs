@@ -7,6 +7,6 @@ namespace Library.API.DTOs.LoanDtos
     {
         public Guid ReaderId { get; set; }
 
-        public required ICollection<BookForLoanDto> Books { get; set; }
+        public required BookForLoanDto Book { get; set; }
     }
 }

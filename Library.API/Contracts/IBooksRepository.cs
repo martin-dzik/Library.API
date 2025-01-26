@@ -13,7 +13,5 @@ namespace Library.API.Contracts
         Task<IList<Book>> GetAllWithAuthorsAsync();
 
         Task<bool> RemoveBook(int id);
-
-        Task<IList<Book>?> GetBooksWithAuthorsByIds(List<int> ids);
     }
 }

@@ -53,30 +53,29 @@ namespace Library.API.Controllers
         {
             var loan = _mapper.Map<Loan>(createLoanDto);
 
-            // get books
-            var ids = createLoanDto.Books.Select(b => b.Id).ToList();
-            var books = await _booksRepository.GetBooksWithAuthorsByIds(ids);
+            // get book
+            var id = createLoanDto.Book.Id;
+            var book = await _booksRepository.GetBookWithAuthorsByIdAsync(id);
 
-            foreach (var book in books)
+            if (book is null)
             {
-                if (book.AvailableCount == 0)
-                {
-                    return BadRequest($"Book with Id: {book.Id} is not available right now!");
-                }
-
-                book.AvailableCount--;
-                
-                _booksRepository.Update(book);
+                return BadRequest();
             }
+
+            if (book.AvailableCount == 0)
+            {
+                return BadRequest($"Book with Id: {book.Id} is not available right now!");
+            }
+
+            book.AvailableCount--;
+            _booksRepository.Update(book);
 
             await _booksRepository.SaveChangesAsync();
 
-            loan.Books = books;
-
+            loan.Book = book;
             _loansRepository.Add(loan);
 
-            
-            await _loansRepository.SaveChangesAsync();            
+            await _loansRepository.SaveChangesAsync();
 
             var loanDto = _mapper.Map<ReturnLoanDto>(loan);
 
