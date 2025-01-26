@@ -82,8 +82,5 @@ namespace Library.API.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = loan.Id }, loanDto);
         }
-
-        [HttpPost]
-
     }
 }
