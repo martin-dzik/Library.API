@@ -2,14 +2,8 @@
 
 namespace Library.API.DTOs.BookDtos
 {
-    public class UpdateBookDto
+    public class UpdateBookDto : BookDtoBase
     {
         public required int Id { get; set; }
-        public required string Name { get; set; }
-        public required string ISBN { get; set; }
-        public required int AvailableCount { get; set; }
-
-        public required ICollection<AuthorDto> Authors { get; set; }
-
     }
 }
