@@ -1,10 +1,9 @@
 ﻿namespace Library.API.DTOs.AuthorDtos
 {
-    public class AuthorDto
+    // shared DTO for POST and GET actions
+    public class AuthorDto : AuthorDtoBase
     {
         // null ID means author doesn't exist yet
         public int? Id { get; set; }
-        public required string Name { get; set; }
-        public required string Surname { get; set; }
     }
 }

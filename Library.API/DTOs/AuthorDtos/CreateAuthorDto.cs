@@ -1,8 +1,6 @@
 ﻿namespace Library.API.DTOs.AuthorDtos
 {
-    public class CreateAuthorDto
+    public class CreateAuthorDto : AuthorDtoBase
     {
-        public required string Name { get; set; }
-        public required string Surname { get; set; }
     }
 }
