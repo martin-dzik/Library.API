@@ -13,7 +13,9 @@ namespace Library.API.Repository
 
         public async Task<Reader?> GetByGuid(Guid guid)
         {
-            return await _dbContext.Readers.FirstOrDefaultAsync(r => r.Id == guid);
+            return await _dbContext.Readers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r => r.Id == guid);
         }
 
         public async Task<Reader?> GetWithLoansByGuid(Guid guid, bool onlyActive = false)
@@ -30,7 +32,9 @@ namespace Library.API.Repository
                 query = query.Include(r => r.Loans);
             }
 
-            return await query.FirstOrDefaultAsync();
+            return await query
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
         }
     }
 }

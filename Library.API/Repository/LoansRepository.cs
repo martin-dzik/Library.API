@@ -18,6 +18,7 @@ namespace Library.API.Repository
                 .Include(l => l.Book)
                 .ThenInclude(b => b.Authors)
                 .Include(l => l.Reader)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
@@ -31,7 +32,8 @@ namespace Library.API.Repository
             query = query
                 .Include(l => l.Reader)
                 .Include(l => l.Book)
-                .ThenInclude(b => b.Authors);
+                .ThenInclude(b => b.Authors)
+                .AsNoTracking();
 
             return await query.ToListAsync();
         }

@@ -12,28 +12,38 @@ namespace Library.API.Repository
         {
         }
 
-        public async Task<IList<Book>> GetAllWithAuthorsAsync()
+        public async Task<IList<Book>> GetAllWithAuthorsAsync(bool asNoTracking = false)
         {
-            return await _dbContext.Books
+            var query = _dbContext.Books
                 .Include(b => b.Authors)
-                .ToListAsync();
+                .AsQueryable();
+
+            if (asNoTracking)
+                query = query.AsNoTracking();
+
+            return await query.ToListAsync();
         }
 
-        public async Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id)
-        {
-            return await _dbContext.Books
-               .Where(b => b.Id == id)
-               .Include(b => b.Authors)
-               .AsNoTracking()
-               .FirstOrDefaultAsync();
-        }
+        //public async Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id)
+        //{
+        //    return await _dbContext.Books
+        //       .Where(b => b.Id == id)
+        //       .Include(b => b.Authors)
+        //       .AsNoTracking()
+        //       .FirstOrDefaultAsync();
+        //}
 
-        public async Task<Book?> GetBookWithAuthorsByIdAsync(int id)
+        public async Task<Book?> GetBookWithAuthorsByIdAsync(int id, bool asNoTracking = false)
         {
-            return await _dbContext.Books
+            var query = _dbContext.Books
                .Where(b => b.Id == id)
                .Include(b => b.Authors)
-               .FirstOrDefaultAsync();
+               .AsQueryable();
+
+            if (asNoTracking)
+                query = query.AsNoTracking();
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<bool> RemoveBook(int id)

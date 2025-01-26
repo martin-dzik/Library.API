@@ -37,6 +37,7 @@ namespace Library.API.Repository
         {
             return await _dbContext
                 .Set<T>()
+                .AsNoTracking()
                 .ToListAsync();
         }
 

@@ -39,7 +39,7 @@ namespace Library.API.Controllers
         [Route("{id:int}/with-authors")]
         public async Task<IActionResult> GetBookWithAuthorsById([FromRoute] int id)
         {
-            var book = await _bookRepository.GetBookWithAuthorsByIdAsNoTrackingAsync(id);
+            var book = await _bookRepository.GetBookWithAuthorsByIdAsync(id, true);
 
             if (book is null)
             {

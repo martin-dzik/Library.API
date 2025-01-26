@@ -99,7 +99,12 @@ namespace Library.API.Controllers
         {
             var loan = await _loansRepository.GetAsync(updateLoanDto.LoanId);
 
-            if (loan is null)
+            if (loan is null || !loan.IsActive)
+            {
+                return BadRequest();
+            }
+
+            if (loan.ReaderId != updateLoanDto.ReaderId)
             {
                 return BadRequest();
             }
