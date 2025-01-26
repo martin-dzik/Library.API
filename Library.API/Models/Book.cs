@@ -9,6 +9,6 @@
 
 
         public virtual ICollection<Author>? Authors { get; set; }
-
+        public virtual ICollection<Loan>? Loans { get; set; }
     }
 }

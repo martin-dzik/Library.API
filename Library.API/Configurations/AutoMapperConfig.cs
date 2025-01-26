@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Library.API.DTOs.AuthorDtos;
 using Library.API.DTOs.BookDtos;
+using Library.API.DTOs.LoanDtos;
+using Library.API.DTOs.ReaderDtos;
 using Library.API.Models;
 
 namespace Library.API.Configurations
@@ -16,6 +18,12 @@ namespace Library.API.Configurations
             CreateMap<AuthorDto, Author>().ReverseMap();
 
             CreateMap<UpdateBookDto, Book>();
+
+            CreateMap<CreateReaderDto, Reader>();
+
+            CreateMap<Reader, ReturnReaderDto>();
+
+            CreateMap<Loan, ReturnLoanDto>();
         }
     }
 }

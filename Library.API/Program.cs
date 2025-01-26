@@ -46,6 +46,7 @@ namespace Library.API
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IBooksRepository, BooksRepository>();
             builder.Services.AddScoped<IAuthorsRepository, AuthorsRepository>();
+            builder.Services.AddScoped<IReadersRepository, ReadersRepository>();
 
             var app = builder.Build();
 
