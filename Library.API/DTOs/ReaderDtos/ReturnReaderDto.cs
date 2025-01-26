@@ -2,10 +2,8 @@
 
 namespace Library.API.DTOs.ReaderDtos
 {
-    public class ReturnReaderDto
+    public class ReturnReaderDto : ReaderDtoBase
     {
         public Guid Id { get; set; }
-        public required string Name { get; set; }
-        public required string Surname { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Library.API.DTOs.ReaderDtos
 {
-    public class ReturnReaderWithLoansDto : ReturnReaderDto
+    public class ReturnReaderWithLoansDto : ReaderDtoBase
     {
         public virtual ICollection<ReturnLoanDto>? Loans { get; set; }
     }
