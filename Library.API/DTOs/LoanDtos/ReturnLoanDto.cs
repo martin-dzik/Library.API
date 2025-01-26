@@ -1,6 +1,7 @@
 ﻿using Library.API.DTOs.BookDtos;
 using Library.API.DTOs.ReaderDtos;
 using Library.API.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Library.API.DTOs.LoanDtos
 {
