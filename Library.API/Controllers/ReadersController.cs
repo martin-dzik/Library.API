@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Library.API.Contracts;
-using Library.API.DTOs.ReaderDtos;
-using Library.API.Models;
+using Library.API.Data.DTOs.ReaderDtos;
+using Library.API.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

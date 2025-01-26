@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Azure;
 using Library.API.Contracts;
-using Library.API.DTOs.LoanDtos;
+using Library.API.Data.DTOs.LoanDtos;
 using Library.API.Helpers;
-using Library.API.Models;
+using Library.API.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

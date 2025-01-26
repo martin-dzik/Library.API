@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Library.API.Contracts;
-using Library.API.DTOs.AuthorDtos;
-using Library.API.DTOs.BookDtos;
+using Library.API.Data.DTOs.AuthorDtos;
+using Library.API.Data.DTOs.BookDtos;
 using Library.API.Helpers;
-using Library.API.Models;
+using Library.API.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

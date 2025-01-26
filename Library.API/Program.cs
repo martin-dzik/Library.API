@@ -1,7 +1,7 @@
 
 using Library.API.Configurations;
 using Library.API.Contracts;
-using Library.API.Data;
+using Library.API.Data.Data;
 using Library.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
