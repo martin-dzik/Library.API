@@ -28,10 +28,10 @@ namespace Library.API.Repository
             {
                 _dbContext.Remove(entity);
 
-                return await Task.FromResult(true);
+                return true;
             }
 
-            return await Task.FromResult(false);
+            return false;
         }
         public async Task<IList<T>> GetAllAsync()
         {

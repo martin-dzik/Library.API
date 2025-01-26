@@ -34,5 +34,23 @@ namespace Library.API.Repository
                .Include(b => b.Authors)
                .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> RemoveBook(int id)
+        {
+            var bookToRemove = await _dbContext.Books
+                .Include(b => b.Authors)
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (bookToRemove != null)
+            {
+                bookToRemove.Authors!.Clear();
+
+                _dbContext.Books.Remove(bookToRemove);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

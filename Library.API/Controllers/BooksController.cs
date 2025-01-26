@@ -108,5 +108,19 @@ namespace Library.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (await _bookRepository.RemoveBook(id))
+            {
+                await _bookRepository.SaveChangesAsync();
+                return NoContent();
+            }
+
+            return NotFound();
+        }
+
     }
 }
