@@ -27,9 +27,12 @@ namespace Library.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllWithAuthors()
         {
-            return Ok(1);
+            var books = await _bookRepository.GetAllWithAuthorsAsync();
+            var bookDtos = _mapper.Map<IList<ReturnBookDto>>(books);
+            
+            return Ok(bookDtos);
         }
 
         [HttpGet]

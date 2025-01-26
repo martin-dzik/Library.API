@@ -7,6 +7,7 @@ namespace Library.API.DTOs.BookDtos
     {
         public required string Name { get; set; }
         public required string ISBN { get; set; }
+        public required int AvailableCount { get; set; }
 
         public required ICollection<AuthorDto> Authors { get; set; }
     }

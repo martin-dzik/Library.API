@@ -8,5 +8,7 @@ namespace Library.API.Contracts
         Task<Book?> GetBookWithAuthorsByIdAsync(int id);
 
         Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id);
+
+        Task<IList<Book>> GetAllWithAuthorsAsync();
     }
 }

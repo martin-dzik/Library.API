@@ -11,6 +11,13 @@ namespace Library.API.Repository
         {
         }
 
+        public async Task<IList<Book>> GetAllWithAuthorsAsync()
+        {
+            return await _dbContext.Books
+                .Include(b => b.Authors)
+                .ToListAsync();
+        }
+
         public async Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id)
         {
             return await _dbContext.Books
