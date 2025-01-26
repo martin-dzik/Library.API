@@ -34,20 +34,6 @@ namespace Library.API.Repository
                 .ThenInclude(b => b.Authors);
 
             return await query.ToListAsync();
-
-            //return await _dbContext.Loans
-            //    .Include(l => l.Reader)
-            //    .Include(l => l.Book)
-            //    .ThenInclude(b => b.Authors)
-            //    .ToListAsync();
         }
-
-        //public async Task<IList<Loan>?> GetAllActive()
-        //{
-        //    await _dbContext.Loans
-        //        .Include(l => l.Reader)
-        //        .Include(l => l.Book)
-        //        .ThenInclude(b => b.A)
-        //}
     }
 }

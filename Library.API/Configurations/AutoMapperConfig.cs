@@ -28,7 +28,7 @@ namespace Library.API.Configurations
                 .ForMember(dest => dest.StartDate, opt => opt
                     .MapFrom(_ => DateOnly.FromDateTime(DateTime.Now)))
                 .ForMember(dest => dest.EndDate, opt => opt
-                    .MapFrom(_ => DateOnly.FromDateTime(DateTime.Now.AddDays(30)))
+                    .MapFrom(_ => DateOnly.FromDateTime(DateTime.Now.AddDays(Constants.LOAN_DAYS)))
                     );
         }
     }
