@@ -4,6 +4,8 @@ namespace Library.API.Contracts
 {
     public interface IReadersRepository : IRepository<Reader>
     {
-        Task<Reader> GetByGuid(Guid guid);
+        Task<Reader?> GetByGuid(Guid guid);
+
+        Task<Reader?> GetWithLoansByGuid(Guid guid);
     }
 }

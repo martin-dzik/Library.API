@@ -37,6 +37,22 @@ namespace Library.API.Controllers
             return Ok(readerDto);
         }
 
+        [HttpGet]
+        [Route("{id:Guid}/with-loans")]
+        public async Task<IActionResult> GetWithLoansById([FromRoute] Guid id)
+        {
+            var reader = await _readersRepository.GetWithLoansByGuid(id);
+
+            if (reader == null)
+            {
+                return NotFound();
+            }
+
+            var readerDto = _mapper.Map<ReturnReaderWithLoansDto>(reader);
+
+            return Ok(readerDto);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] CreateReaderDto createReaderDto)
         {

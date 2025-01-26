@@ -15,5 +15,13 @@ namespace Library.API.Repository
         {
             return await _dbContext.Readers.FirstOrDefaultAsync(r => r.Id == guid);
         }
+
+        public async Task<Reader?> GetWithLoansByGuid(Guid guid)
+        {
+            return await _dbContext.Readers
+                .Where(r => r.Id == guid)
+                .Include(r => r.Loans)
+                .FirstOrDefaultAsync();
+        }
     }
 }

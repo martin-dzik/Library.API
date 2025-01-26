@@ -23,6 +23,8 @@ namespace Library.API.Configurations
 
             CreateMap<Reader, ReturnReaderDto>();
 
+            CreateMap<Reader, ReturnReaderWithLoansDto>();
+
             CreateMap<Loan, ReturnLoanDto>();
         }
     }
