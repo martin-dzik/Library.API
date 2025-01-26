@@ -19,14 +19,6 @@ namespace Library.API.Repository
                 .ToListAsync();
         }
 
-        public async Task<IList<Book>?> GetBooksWithAuthorsByIds(List<int> ids)
-        {
-            return await _dbContext.Books
-                .Where(b => ids.Contains(b.Id))
-                .Include(b => b.Authors)
-                .ToListAsync();
-        }
-
         public async Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id)
         {
             return await _dbContext.Books
