@@ -38,10 +38,26 @@ namespace Library.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id:Guid}/with-loans")]
+        [Route("{id:Guid}/with-all-loans")]
         public async Task<IActionResult> GetWithLoansById([FromRoute] Guid id)
         {
             var reader = await _readersRepository.GetWithLoansByGuid(id);
+
+            if (reader == null)
+            {
+                return NotFound();
+            }
+
+            var readerDto = _mapper.Map<ReturnReaderWithLoansDto>(reader);
+
+            return Ok(readerDto);
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}/with-active-loans")]
+        public async Task<IActionResult> GetWithActiveLoansById([FromRoute] Guid id)
+        {
+            var reader = await _readersRepository.GetWithLoansByGuid(id, true);
 
             if (reader == null)
             {

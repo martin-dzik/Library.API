@@ -16,12 +16,21 @@ namespace Library.API.Repository
             return await _dbContext.Readers.FirstOrDefaultAsync(r => r.Id == guid);
         }
 
-        public async Task<Reader?> GetWithLoansByGuid(Guid guid)
+        public async Task<Reader?> GetWithLoansByGuid(Guid guid, bool onlyActive = false)
         {
-            return await _dbContext.Readers
-                .Where(r => r.Id == guid)
-                .Include(r => r.Loans)
-                .FirstOrDefaultAsync();
+            var query = _dbContext.Readers
+                .Where(r => r.Id == guid);
+
+            if (onlyActive)
+            {
+                query = query.Include(r => r.Loans.Where(l => l.IsActive));
+            }
+            else
+            {
+                query = query.Include(r => r.Loans);
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

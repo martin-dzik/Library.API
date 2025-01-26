@@ -119,7 +119,7 @@ namespace Library.API.Controllers
                 return NoContent();
             }
 
-            return NotFound();
+            return BadRequest($"Book with id: {id} can not be deleted because active loans exist or it was not found");
         }
 
     }

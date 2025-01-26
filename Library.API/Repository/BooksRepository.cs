@@ -50,6 +50,15 @@ namespace Library.API.Repository
                 .Include(b => b.Authors)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
+            var activeLoanOfBookExists = await _dbContext.Loans
+                .Where(l => l.BookId == id && l.IsActive)
+                .FirstOrDefaultAsync();
+
+            if (activeLoanOfBookExists != null)
+            {
+                return false;
+            }
+
             if (bookToRemove != null)
             {
                 bookToRemove.Authors!.Clear();

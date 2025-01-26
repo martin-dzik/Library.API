@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using Library.API.Contracts;
 using Library.API.DTOs.LoanDtos;
 using Library.API.Helpers;
@@ -33,10 +34,21 @@ namespace Library.API.Controllers
         }
 
         [HttpGet]
+        [Route("active")]
+        public async Task<IActionResult> GetAllActive()
+        {
+            var activeLoans = await _loansRepository.GetAllWithReadersAsync(true);
+            var loanDtos = _mapper.Map<IList<ReturnLoanDto>>(activeLoans);
+
+            return Ok(loanDtos);
+        }
+
+
+        [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var loan = await _loansRepository.GetAsync(id);
+            var loan = await _loansRepository.GetAllInfoById(id);
 
             if (loan is null)
             {
@@ -49,11 +61,10 @@ namespace Library.API.Controllers
         }
 
         [HttpPost]
+        [Route("loan")]
         public async Task<IActionResult> Create([FromBody] CreateLoanDto createLoanDto)
         {
             var loan = _mapper.Map<Loan>(createLoanDto);
-
-            // get book
             var id = createLoanDto.Book.Id;
             var book = await _booksRepository.GetBookWithAuthorsByIdAsync(id);
 
@@ -80,6 +91,44 @@ namespace Library.API.Controllers
             var loanDto = _mapper.Map<ReturnLoanDto>(loan);
 
             return CreatedAtAction(nameof(GetById), new { id = loan.Id }, loanDto);
+        }
+
+        [HttpPost]
+        [Route("return")]
+        public async Task<IActionResult> ReturnLoan([FromBody] UpdateLoanDto updateLoanDto)
+        {
+            var loan = await _loansRepository.GetAsync(updateLoanDto.LoanId);
+
+            if (loan is null)
+            {
+                return BadRequest();
+            }
+
+            var book = await _booksRepository.GetAsync(loan.BookId);
+
+            if (book is null)
+            {
+                return BadRequest();
+            }
+
+            book.AvailableCount++;
+            loan.IsActive = false;
+
+            _loansRepository.Update(loan);
+            _booksRepository.Update(book);
+
+            await _loansRepository.SaveChangesAsync();
+            await _booksRepository.SaveChangesAsync();
+
+            var loanObj = new
+            {
+                loanId = loan.Id,
+                book = book.Name,
+                status = "Returned"
+                
+            };
+
+            return CreatedAtAction(nameof(GetById), new { id = loan.Id }, loanObj);
         }
     }
 }

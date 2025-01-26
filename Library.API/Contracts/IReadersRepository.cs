@@ -6,6 +6,6 @@ namespace Library.API.Contracts
     {
         Task<Reader?> GetByGuid(Guid guid);
 
-        Task<Reader?> GetWithLoansByGuid(Guid guid);
+        Task<Reader?> GetWithLoansByGuid(Guid guid, bool onlyActive = false);
     }
 }
