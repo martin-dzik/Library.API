@@ -1,4 +1,5 @@
-﻿using Library.API.Models;
+﻿using Library.API.Helpers;
+using Library.API.Models;
 using Library.API.Repository;
 
 namespace Library.API.Contracts
@@ -12,5 +13,7 @@ namespace Library.API.Contracts
         Task<IList<Book>> GetAllWithAuthorsAsync();
 
         Task<bool> RemoveBook(int id);
+
+        Task<IList<Book>?> GetBooksWithAuthorsByIds(List<int> ids);
     }
 }

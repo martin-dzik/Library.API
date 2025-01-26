@@ -1,5 +1,6 @@
 ﻿using Library.API.Contracts;
 using Library.API.Data;
+using Library.API.Helpers;
 using Library.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,14 @@ namespace Library.API.Repository
         public async Task<IList<Book>> GetAllWithAuthorsAsync()
         {
             return await _dbContext.Books
+                .Include(b => b.Authors)
+                .ToListAsync();
+        }
+
+        public async Task<IList<Book>?> GetBooksWithAuthorsByIds(List<int> ids)
+        {
+            return await _dbContext.Books
+                .Where(b => ids.Contains(b.Id))
                 .Include(b => b.Authors)
                 .ToListAsync();
         }
