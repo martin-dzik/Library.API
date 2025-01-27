@@ -24,15 +24,6 @@ namespace Library.API.Repository
             return await query.ToListAsync();
         }
 
-        //public async Task<Book?> GetBookWithAuthorsByIdAsNoTrackingAsync(int id)
-        //{
-        //    return await _dbContext.Books
-        //       .Where(b => b.Id == id)
-        //       .Include(b => b.Authors)
-        //       .AsNoTracking()
-        //       .FirstOrDefaultAsync();
-        //}
-
         public async Task<Book?> GetBookWithAuthorsByIdAsync(int id, bool asNoTracking = false)
         {
             var query = _dbContext.Books
